@@ -1,0 +1,22 @@
+.DS_Store
+.build/
+build/
+.swiftpm/
+
+# Keep private originals and working data outside this repository.
+/data/
+/private/
+*.pdf
+*.csv
+*.ofx
+*.qfx
+*.qif
+*.mymoney
+*.sqlite
+*.sqlite3
+*.sqlite-wal
+*.sqlite-shm
+*.db
+*.private.yaml
+*.private.yml
+*.private.txt

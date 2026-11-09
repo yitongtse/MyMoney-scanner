@@ -1,0 +1,51 @@
+# Sample transactions file for a checking account (synthetic data), as a transactions scanner prints it.
+# Every field is listed in ../SPEC.md. Only format, version, transactions, and each line's date and amount are required.
+format: mymoney-transactions            # required
+version: 1                              # required
+institution: Example Bank               # optional: not used, for people reading the file
+accountName: Everyday Checking          # optional: not used, for people reading the file
+accountNumberLast4: "1234"              # optional: picks the account when none is chosen
+sourceFile: "activity-2026-03.csv"      # optional: not used, for people reading the file
+currency: USD                           # optional: default USD
+periodStart: 2026-03-01                 # optional: default first transaction date
+periodEnd: 2026-03-31                   # optional: default last transaction date
+balance: 6670.75                        # optional: balance on periodEnd, pre-fills Balance Account
+transactions:                           # required (may be empty)
+  - date: 2026-03-01                    # required
+    amount: 3200.00                     # required: money in is positive
+    payee: "EXAMPLE CORP PAYROLL"       # optional
+    memo: Salary                        # optional
+    category: Salary                    # optional: otherwise rules decide
+    id: "20260301-0001"                 # optional, recommended: a re-import skips lines already imported
+  - date: 2026-03-03
+    amount: -84.12                      # money out is negative
+    payee: "EXAMPLE GROCER #12"
+    category: Groceries
+    id: "20260303-0002"
+  - date: 2026-03-05
+    amount: -1800.00
+    payee: Example Property Management
+    checkNumber: "1042"                 # optional
+    memo: March rent
+    id: "20260305-0003"
+  - date: 2026-03-12
+    amount: -96.40
+    payee: "EXAMPLE POWER & LIGHT"
+    category: "Utilities:Electric"      # Parent:Child path, created if missing
+    id: "20260312-0004"
+  - date: 2026-03-15
+    amount: 3200.00
+    payee: "EXAMPLE CORP PAYROLL"
+    memo: Salary
+    category: Salary
+    id: "20260315-0005"
+  - date: 2026-03-20
+    amount: -250.00
+    payee: "EXAMPLE CARD PAYMENT"
+    category: "[Visa]"                  # a transfer to the account named Visa
+    id: "20260320-0006"
+  - date: 2026-03-31
+    amount: 1.27
+    payee: Interest Paid
+    category: Interest
+    id: "20260331-0007"

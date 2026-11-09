@@ -1,0 +1,43 @@
+# Sample statement summary for the same brokerage account (synthetic data), as a statement scanner prints it.
+# Every field is listed in ../SPEC.md. Required: format, version, periodEnd, and endingCash or positions.
+format: mymoney-statement-summary       # required
+version: 1                              # required
+institution: Example Brokerage          # optional: shown as the statement's title
+accountName: Individual Brokerage       # optional: not used
+accountNumberLast4: "5678"              # optional: MyMoney warns if it isn't the account's
+sourceFile: "Statement 2026-01.pdf"     # optional: shown as the statement's title
+periodStart: 2026-01-01                 # optional, recommended: needed for starting shares and prices
+periodEnd: 2026-01-31                   # required
+startingCash: 500.00                    # optional, recommended
+endingCash: 2151.42                     # required unless positions are given
+totalStartValue: 2700.00                # optional: not used, for checking the scanner (cash + positions)
+totalEndValue: 4971.42                  # optional: not used
+positions:                              # required unless endingCash is given
+  - name: Acme Corp                     # name, symbol or CUSIP required; matched by CUSIP, then symbol, then name
+    symbol: ACME
+    cusip: "000000AA1"
+    startShares: 20                     # optional: shares the day before periodStart
+    startPrice: 70.00                   # optional
+    startValue: 1400.00                 # optional
+    endShares: 25                       # optional, recommended: checked against MyMoney
+    endPrice: 80.00                     # optional: saved as the price
+    endValue: 2000.00                   # optional: with endShares, gives the exact price
+    costBasis: 1801.00                  # optional: compared with MyMoney's (warning only)
+  - name: Total Market Index Fund
+    symbol: TMIF
+    startShares: 10
+    startPrice: 80.00
+    startValue: 800.00
+    endShares: 10.123457
+    endPrice: 81.00
+    endValue: 820.00
+    costBasis: 770.00
+info:                                   # optional: shown for reference only
+  - label: Deposits                     # required in each info line
+    amount: 2000.00                     # required in each info line
+  - label: Dividends and interest
+    amount: 13.42
+  - label: Commissions and fees
+    amount: -2.00
+  - label: Change in market value
+    amount: 260.00

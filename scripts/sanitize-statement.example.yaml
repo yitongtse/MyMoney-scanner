@@ -1,0 +1,37 @@
+# Synthetic examples only. Keep your edited copy outside the repository.
+# Each aliases group is one entity and gets one stable typed pseudonym.
+# Supported YAML subset: this block structure, string scalars, full-line comments.
+# Use spaces exactly as shown. Quote aliases containing YAML punctuation.
+bank:
+  - aliases:
+      - "Fabrikam Bank"
+      - "Fabrikam"
+owner:
+  - aliases:
+      - "Alex Example"
+      - "Alex Q. Example"
+account:
+  - aliases:
+      - "AB-12345678"
+      - "****5678"
+address:
+  - aliases:
+      - "123 Example Street"
+      - "123 Example St."
+  - aliases:
+      - "Sample City, ZZ 12345"
+      - "Sample City ZZ 12345"
+ssn:
+  - aliases:
+      - "000-12-3456"
+      - "XXX-XX-3456"
+stock:
+  - aliases:
+      - "Contoso Industries"
+      - "CTSO"
+  - aliases:
+      - "Northwind Example Fund"
+      - "NWEX"
+other:
+  - aliases:
+      - "alex@example.invalid"

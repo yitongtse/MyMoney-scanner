@@ -1,0 +1,67 @@
+# Sample transactions file for a brokerage account (synthetic data), as a transactions scanner prints it.
+# Every field is listed in ../SPEC.md, including what each action requires.
+# The account already held 20 ACME and 10 TMIF shares and 500.00 cash on Dec 31.
+format: mymoney-transactions            # required
+version: 1                              # required
+institution: Example Brokerage          # optional: not used
+accountName: Individual Brokerage       # optional: not used
+accountNumberLast4: "5678"              # optional: picks the account when none is chosen
+sourceFile: "history-2026-01.csv"       # optional: not used
+periodStart: 2026-01-01                 # optional
+periodEnd: 2026-01-31                   # optional
+balance: 2151.42                        # optional: cash (sweep) balance on periodEnd
+transactions:                           # required
+  - date: 2026-01-02                    # required
+    amount: 2000.00                     # required for a cash line (no action)
+    payee: Transfer from checking       # optional
+    id: "B-0001"                        # optional, recommended
+  - date: 2026-01-05
+    action: buy                         # optional: makes this an investment line
+    symbol: ACME                        # buy: security, symbol or CUSIP required
+    security: Acme Corp                 # optional: the name
+    securityType: stock                 # optional: used when the security is created
+    shares: 10                          # buy: required
+    price: 75.00                        # buy: price or amount required
+    commission: 1.00                    # optional
+    amount: 751.00                      # total cash (sign ignored); worked out from price if missing
+    id: "B-0002"
+  - date: 2026-01-15
+    action: dividend
+    symbol: ACME                        # dividend: security optional
+    security: Acme Corp
+    amount: 3.00                        # dividend: required
+    id: "B-0003"
+  - date: 2026-01-20
+    action: reinvestDividend            # the dividend buys shares; cash is unchanged
+    symbol: TMIF                        # required
+    security: Total Market Index Fund
+    securityType: mutualFund
+    shares: 0.123457                    # required; up to 6 decimals
+    price: 81.00                        # amount or price recommended (sets the cost)
+    amount: 10.00
+    id: "B-0004"
+  - date: 2026-01-30
+    action: sell
+    symbol: ACME                        # required
+    security: Acme Corp
+    shares: 5                           # required
+    price: 80.00                        # price or amount required
+    commission: 1.00
+    amount: 399.00
+    id: "B-0005"
+  - date: 2026-01-31
+    action: interest                    # interest on the cash sweep
+    amount: 0.42                        # required; no security needed
+    memo: Sweep interest
+    id: "B-0006"
+positions:                              # optional: holdings on periodEnd; prices saved, share counts checked
+  - symbol: ACME                        # security, symbol or CUSIP required
+    security: Acme Corp
+    securityType: stock                 # optional
+    shares: 25                          # required
+    price: 80.00                        # optional
+  - symbol: TMIF
+    security: Total Market Index Fund
+    securityType: mutualFund
+    shares: 10.123457
+    price: 81.00

@@ -1,0 +1,19 @@
+# Sample statement summary for the same checking account (synthetic data), as a statement scanner prints it.
+# Every field is listed in ../SPEC.md. Only format, version, periodEnd and endingCash are required here.
+format: mymoney-statement-summary       # required
+version: 1                              # required
+institution: Example Bank               # optional: shown as the statement's title
+accountName: Everyday Checking          # optional: not used, for people reading the file
+accountNumberLast4: "1234"              # optional: MyMoney warns if it isn't the account's
+sourceFile: "Statement 2026-03.pdf"     # optional: shown as the statement's title
+periodStart: 2026-03-01                 # optional, recommended: starting figures are as of the day before
+periodEnd: 2026-03-31                   # required: the statement date
+startingCash: 2500.00                   # optional, recommended: as printed; checked against the last reconciliation
+endingCash: 6670.75                     # required (unless positions are given): as printed
+info:                                   # optional: shown for reference only
+  - label: Deposits and other credits   # required in each info line
+    amount: 6401.27                     # required in each info line
+  - label: Withdrawals and other debits
+    amount: -2230.52
+  - label: Checks paid
+    amount: -1800.00
